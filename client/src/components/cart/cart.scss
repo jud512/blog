@@ -1,0 +1,57 @@
+@import '../../settings/_settings.scss';
+
+.cart{
+    display: flex;
+    width: 250px;
+    height: min-content;
+    border: solid 1px rgb(215, 214, 214);
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: $box-shadow;
+
+    .left{
+        display: flex;
+        flex-direction: column;
+        gap:30px;
+
+        .title{
+            font-size: 16px;
+            color: gray;
+            text-transform: uppercase;
+        }
+
+        .counter{
+            font-size: 50px;
+            color: $clr-counter;
+        }
+
+        .link{
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+
+    .right{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        .percentage{
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            color: green;            
+        }
+        .icon{
+            background-color: $clr-user-bg;
+            color: $clr-user;
+            padding: 2px;
+            font-size: 32px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+    }
+}

@@ -1,0 +1,10 @@
+.dashboard{
+    display: flex;
+    margin: 10px;
+
+    .dashboardContainer{
+        flex:3;
+        display: flex;
+        justify-content: space-around;
+    }
+}

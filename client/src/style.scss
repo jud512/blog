@@ -1,0 +1,18 @@
+@import './settings/_settings.scss';
+//https://coolors.co/011627-fdfffc-9ce8e0-e71d36-ff9f1c
+// https: //looka.com/editor/101799731
+.app{
+    display: flex;
+    justify-content: center;
+    background-color: $bg-login;
+    min-height: 100vh;
+    .container{
+        width: 1024px;
+        background-color: white;
+        
+        .link{
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+}

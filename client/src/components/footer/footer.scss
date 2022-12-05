@@ -1,0 +1,17 @@
+@import '../../settings/_settings.scss';
+footer{
+    margin-top: 0px;
+    padding: 20px;
+    background-color: $bg-footer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    img{
+        height: 50px;
+    }
+
+    span{
+        
+    }
+}

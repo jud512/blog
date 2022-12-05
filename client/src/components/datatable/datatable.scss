@@ -1,0 +1,62 @@
+@import '../../settings/_settings.scss';
+.datatable{
+    display: flex;
+    margin-top: 10px;
+
+
+
+    .grid{
+        flex: 5;
+        padding:50px;
+        .datatableTitle{            
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+
+            p{
+                font-size: 20px;
+                font-weight: 600;
+                color:gray;
+            }
+
+            .link{
+                text-decoration: none;
+                background-color: $color-blue;
+                color:white;
+                padding: 5px 10px;
+                border-radius: 10px;
+            }
+        }
+        
+    }
+
+    .cellAction{
+        display: flex;
+        align-items:center;
+        
+        
+        gap: 10px;
+
+        .viewButton, .deleteButton{
+            text-decoration: none;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+        }
+
+        .viewButton{           
+            color: green;
+            background-color: rgb(141, 197, 141);
+            
+        }
+
+        .deleteButton{
+            background-color: rgb(220, 178, 178);
+            color: red;
+        }
+    }
+    
+}
