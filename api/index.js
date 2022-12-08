@@ -32,6 +32,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
+const port = process.env.PORT || 8800;
 app.listen(8800, () => {
   console.log("Connected!");
 });
