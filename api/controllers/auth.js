@@ -1,7 +1,10 @@
 import { db } from "../db.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import * as dotenv from "dotenv";
+dotenv.config();
 
+//REGISTER
 export const register = (req, res) => {
   //check existing user
   const q = "SELECT * FROM users WHERE email = ? OR username = ?";
@@ -10,7 +13,7 @@ export const register = (req, res) => {
     if (err) return res.json(err);
     if (data.length) return res.status(409).json("User already exists.");
 
-    //Hash the password and creare a user
+    //Hash the password and create a user
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
 
@@ -31,6 +34,7 @@ export const register = (req, res) => {
   });
 };
 
+//LOGIN
 export const login = (req, res) => {
   const q = "SELECT * FROM users WHERE username = ?";
 
@@ -43,9 +47,9 @@ export const login = (req, res) => {
       data[0].password
     );
     if (!isPasswordCorrect)
-      return res.status(400).json("Wrong usernam or password!");
+      return res.status(400).json("Wrong username or password!");
 
-    const token = jwt.sign({ id: data[0].id }, "jwtkey");
+    const token = jwt.sign({ id: data[0].id }, process.env.JWT_KEY);
     const { password, ...other } = data[0];
     res
       .cookie("access_token", token, {
@@ -56,6 +60,7 @@ export const login = (req, res) => {
   });
 };
 
+//LOGOUT
 export const logout = (req, res) => {
   res
     .clearCookie("access_token", {

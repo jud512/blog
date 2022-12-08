@@ -23,7 +23,7 @@ export const getPostsAll = (req, res) => {
 //   const q = "DELETE FROM users WHERE `id=?`";
 
 //   db.query(q, [req.params.id], (err, data) => {
-//     if (err) res.status(403).json("You didn't delete thi spost.");
+//     if (err) res.status(403).json("You didn't delete this spost.");
 //     return res.json("User has been deleted.");
 //   });
 // };

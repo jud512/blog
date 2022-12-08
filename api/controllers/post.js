@@ -1,6 +1,9 @@
 import { db } from "../db.js";
 import jwt from "jsonwebtoken";
+import * as dotenv from "dotenv";
+dotenv.config();
 
+//GET ALL POSTS
 export const getPosts = (req, res) => {
   const q = req.query.cat
     ? "SELECT * FROM posts WHERE cat=?"
@@ -8,14 +11,14 @@ export const getPosts = (req, res) => {
 
   db.query(q, [req.query.cat], (err, data) => {
     if (err) return res.status(500).json(err);
-
     return res.status(200).json(data);
   });
 };
 
+//GET A SINGLE POST
 export const getPost = (req, res) => {
   const q =
-    "SELECT p.id, `username`, `title`, `desc`, p.img, u.img AS userImg, `cat`, `date` FROM users u JOIN posts p ON u.id=p.uid WHERE p.id=?";
+    "SELECT p.id, u.id as userId, `username`, `firstname`, `lastname`, `title`, `desc`, p.img, u.img AS userImg, `cat`, `date` FROM users u JOIN posts p ON u.id=p.uid WHERE p.id=?";
 
   db.query(q, [req.params.id], (err, data) => {
     if (err) return res.status(500).json(err);
@@ -24,11 +27,12 @@ export const getPost = (req, res) => {
   });
 };
 
+//ADD A POST
 export const addPost = (req, res) => {
   const token = req.cookies.access_token;
   if (!token) return res.status(401).json("Not authenticated");
 
-  jwt.verify(token, "jwtkey", (err, userInfo) => {
+  jwt.verify(token, process.env.JWT_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 
     const q =
@@ -50,11 +54,12 @@ export const addPost = (req, res) => {
   });
 };
 
+//DELETE A POST
 export const deletePost = (req, res) => {
   const token = req.cookies.access_token;
   if (!token) return res.status(401).json("Not authenticated");
 
-  jwt.verify(token, "jwtkey", (err, userInfo) => {
+  jwt.verify(token, process.env.JWT_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 
     const postId = req.params.id;
@@ -68,11 +73,12 @@ export const deletePost = (req, res) => {
   });
 };
 
+//UPDATE A POST
 export const updatePost = (req, res) => {
   const token = req.cookies.access_token;
   if (!token) return res.status(401).json("Not authenticated");
 
-  jwt.verify(token, "jwtkey", (err, userInfo) => {
+  jwt.verify(token, process.env.JWT_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 
     const postId = req.params.id;

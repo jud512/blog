@@ -33,6 +33,7 @@ const Single = () => {
     fetchData();
   }, [postId])
 
+  console.log(post)
   const handleDelete = async () => {
     try {
       await axios.delete(`/posts/${postId}`)
@@ -47,13 +48,13 @@ const Single = () => {
       <div className="content">
         <img src={`../upload/${post?.img}`} alt="" />
         <div className="user">
-          <Link to={`/profile/${currentUser.id}`}>
+          <Link to={`/profile/${post.userId}`}>
             {post.userImg && <img src={post.userImg} alt="" />}
 
           </Link>
           
           <div className="info">
-            <span>{currentUser.firstname} {currentUser.lastname}</span>
+            <span>{post.firstname} {post.lastname}</span>
             <p>Posted {moment(post.date).fromNow()} </p>
           </div>
           {currentUser.username === post.username && <div className="icon">

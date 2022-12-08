@@ -5,10 +5,11 @@ import { useState } from 'react';
 import axios from 'axios'
 import { useLocation, useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import { useEffect } from 'react';
 
 const Write = () => {
 
-  const state = useLocation().state
+  const state = useLocation().state;
   console.log(state);
   const [value, setValue] = useState(state?.desc || '');
   const [title, setTitle] = useState(state?.title ||'');
@@ -20,7 +21,7 @@ const Write = () => {
   const upload = async () => {
     try {
       const formData = new FormData();
-      formData.append('file', file)
+      formData.append('file', file)     
       const res = await axios.post("/upload", formData)
       return res.data
     } catch (error) {
@@ -45,13 +46,23 @@ const Write = () => {
         img: file ? imgUrl : "",
         date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")
       });
+
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
     navigate("/")
   }
-
   
+  
+  const handleFileSelect = async (e) => {
+    e.preventDefault();
+    setFile(e.target.files[0])
+
+  }
+
+ 
+console.log(state)
   return (
     <div className='add'>
       <div className="content">
@@ -62,15 +73,25 @@ const Write = () => {
       </div>
       <div className="menu">
         <div className="item">
-          <h1>Publish</h1>
-          <span>
-            <b>Status: </b> Draft
-          </span>
-          <span>
-            <b>Visability: </b> Public
-          </span>
-          <input style={{display:"none"}}type="file" id="file" name="" onChange={e => setFile(e.target.files[0])}/>
-          <label className='file' htmlFor="file">Upload Image</label>
+          <div>
+            <div className="left">
+              <h1>Publish</h1>
+              <span>
+                <b>Status: </b> Draft
+              </span>
+              <span>
+                <b>Visability: </b> Public
+              </span>
+              <input style={{display:"none"}}type="file" id="file" name="" onChange={handleFileSelect}/>
+              <label className='file' htmlFor="file">Upload Image</label>
+            </div>
+            <div className="right">
+             {state ?  <img src={`../upload/${file}`}/> : <img src={file ? URL.createObjectURL(file) : "https://media.istockphoto.com/id/1357365823/vector/default-image-icon-vector-missing-picture-page-for-website-design-or-mobile-app-no-photo.jpg?s=612x612&w=0&k=20&c=PM_optEhHBTZkuJQLlCjLz-v3zzxp-1mpNQZsdjrbns="} alt="" />}
+            </div>  
+          </div>
+          
+
+
           <div className="buttons">
             <button>Save as a draft</button>
             <button onClick={handleSubmit}>Publish</button>
