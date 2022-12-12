@@ -10,6 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import { convertLength } from '@mui/material/styles/cssUtils';
+import BlogApi from '../../apis/BlogApi';
 
 const columnsUsers = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -105,7 +106,7 @@ const Datatable = ({type}) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get("/dashboard/users");
+                const res = await BlogApi.get("/dashboard/users");
                 setUsers(res.data)
             } catch (error) {
                 console.log(error);
@@ -118,7 +119,7 @@ const Datatable = ({type}) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get("/dashboard/posts");
+                const res = await BlogApi.get("/dashboard/posts");
                 setPosts(res.data);
             } catch (error) {
                 console.log(error)

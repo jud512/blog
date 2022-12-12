@@ -76,6 +76,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  console.log(process.env.NODE_ENV);
   return (
     <div className="app">
       <div className="container">

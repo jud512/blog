@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import './home.scss'
 import axios from 'axios'
+import BlogApi from '../../apis/BlogApi';
 
 const Home = () => {
 
@@ -13,7 +14,7 @@ const Home = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`/posts${cat}`);
+                const res = await BlogApi.get(`/posts${cat}`);
                 setPosts(res.data)
             } catch (error) {
                 console.log(error);

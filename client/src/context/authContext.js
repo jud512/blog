@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
+import BlogApi from "../apis/BlogApi";
 
 export const AuthContext = createContext();
 
@@ -11,12 +12,12 @@ export const AuthContexProvider = ({ children }) => {
   );
 
   const login = async (inputs) => {
-    const res = await axios.post("/auth/login", inputs);
+    const res = await BlogApi.post("/auth/login", inputs);
     setCurrentUser(res.data);
   };
 
   const logout = async (inputs) => {
-    await axios.post("/auth/logout");
+    await BlogApi.post("/auth/logout");
     setCurrentUser(null);
   };
 

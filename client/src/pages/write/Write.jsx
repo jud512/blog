@@ -6,11 +6,12 @@ import axios from 'axios'
 import { useLocation, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { useEffect } from 'react';
+import BlogApi from '../../apis/BlogApi';
 
 const Write = () => {
 
   const state = useLocation().state;
-  console.log(state);
+  // console.log(state);
   const [value, setValue] = useState(state?.desc || '');
   const [title, setTitle] = useState(state?.title ||'');
   const [file, setFile] = useState(state?.img || null);
@@ -22,7 +23,7 @@ const Write = () => {
     try {
       const formData = new FormData();
       formData.append('file', file)     
-      const res = await axios.post("/upload", formData)
+      const res = await BlogApi.post("/upload", formData)
       return res.data
     } catch (error) {
       console.log(error);
@@ -34,12 +35,12 @@ const Write = () => {
     const imgUrl = await upload()
 
     try {
-      state ? await axios.put(`/posts/${state.id}`, {
+      state ? await BlogApi.put(`/posts/${state.id}`, {
         title,
         desc:value,
         cat,
         img:file ? imgUrl : "",
-      }) : await axios.post('/posts/', {
+      }) : await BlogApi.post('/posts/', {
         title,
         desc:value,
         cat,
@@ -62,7 +63,7 @@ const Write = () => {
   }
 
  
-console.log(state)
+// console.log(state)
   return (
     <div className='add'>
       <div className="content">

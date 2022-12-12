@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useContext, useState } from 'react'
 import axios from 'axios';
 import { AuthContext } from '../../context/authContext';
+import BlogApi from '../../apis/BlogApi';
 
 const Login = () => {
   const [inputs, setInputs] = useState({
@@ -25,7 +26,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await login(inputs)
-      await axios.post("/auth/login", inputs);
+      await BlogApi.post("/auth/login", inputs);
       navigate("/");
     } catch (error) {
       setError(error.response.data)

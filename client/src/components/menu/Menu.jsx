@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import './menu.scss';
 import { Link } from 'react-router-dom';
+import BlogApi from '../../apis/BlogApi';
 
 const Menu = ({cat}) => {
     const [posts, setPosts] = useState([]);
@@ -10,7 +11,7 @@ const Menu = ({cat}) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`/posts/?cat=${cat}`)
+                const res = await BlogApi.get(`/posts/?cat=${cat}`)
                 setPosts(res.data)
             } catch (error) {
                 console.log(error);

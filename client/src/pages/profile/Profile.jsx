@@ -8,7 +8,7 @@ import moment from 'moment';
 import DOMPurify from 'dompurify'
 import { Link } from 'react-router-dom';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-
+import BlogApi from '../../apis/BlogApi';
 
 const Profile = () => {
 
@@ -19,7 +19,7 @@ const Profile = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`/users/${userId}`);
+                const res = await BlogApi.get(`/users/${userId}`);
                 setUserPosts(res.data);
             } catch (err) {
                 console.log(err)

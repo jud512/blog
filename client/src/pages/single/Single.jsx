@@ -10,6 +10,7 @@ import moment from 'moment';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/authContext';
 import DOMPurify from 'dompurify'
+import BlogApi from '../../apis/BlogApi';
 
 
 const Single = () => {
@@ -24,7 +25,7 @@ const Single = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/posts/${postId}`);
+        const res = await BlogApi.get(`/posts/${postId}`);
         setPost(res.data);
       } catch (error) {
         console.log(error);
@@ -36,7 +37,7 @@ const Single = () => {
   console.log(post)
   const handleDelete = async () => {
     try {
-      await axios.delete(`/posts/${postId}`)
+      await BlogApi.delete(`/posts/${postId}`)
       navigate("/")
     } catch (error) {
       console.log(error);

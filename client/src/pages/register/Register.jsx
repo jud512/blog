@@ -2,6 +2,7 @@ import './register.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
+import BlogApi from '../../apis/BlogApi';
 
 const Register = () => {
   const [inputs, setInputs] = useState({
@@ -35,7 +36,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/auth/register", inputs)
+      await BlogApi.post("/auth/register", inputs)
       navigate("/login");
       
     } catch (error) {
