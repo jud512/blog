@@ -16,7 +16,7 @@ export const AuthContexProvider = ({ children }) => {
     setCurrentUser(res.data);
   };
 
-  const logout = async (inputs) => {
+  const logout = async () => {
     await BlogApi.post("/auth/logout");
     setCurrentUser(null);
   };

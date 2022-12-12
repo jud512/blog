@@ -4,14 +4,23 @@ import userRoutes from "./routes/users.js";
 import postRoutes from "./routes/posts.js";
 import dashboardRoutes from "./routes/dashboard.js";
 import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
 import multer from "multer";
 import cors from "cors";
 
 const app = express();
 
 app.use(express.json());
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST", "DELETE", "PUT"],
+    allowedHeaders: ["Content-Type", "Authorization", "x-csrf-token"],
+    credentials: true,
+  })
+);
 app.use(cookieParser());
-app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -35,6 +44,6 @@ app.use("/api/posts", postRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
 const port = process.env.PORT || 8800;
-app.listen(8800, () => {
+app.listen(port, () => {
   console.log("Connected!");
 });

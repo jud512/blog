@@ -114,7 +114,7 @@ const Datatable = ({type}) => {
         }
 
         typeDatatable == 'users' && fetchData();
-    })
+    }, [typeDatatable])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -126,7 +126,7 @@ const Datatable = ({type}) => {
             }
         }
         typeDatatable == 'posts' && fetchData();
-    })
+    }, [typeDatatable])
 
 
   return (
